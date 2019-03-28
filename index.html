@@ -5,22 +5,65 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
+    <h1>Ignacio's Twiddler</h1>
+    <div class="ten_tweets">
+    </div>
+    <div class="users_tweets">
+
+    </div>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
+        var $body = $('.ten_tweets');
         $body.html('');
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var d = new Date();
+          var n = d.toLocaleString();
+          var $tweet = $('<div class="tweet"></div>');
+          var $user = $('<p class="user"></p>');
+          var $message = $('<p class="message"></p>');
           $tweet.appendTo($body);
+          $user.addClass(tweet.user).attr('tweet_user', tweet.user).text('Posted on: ' + n + ' @' + tweet.user + ': ' + tweet.message ).appendTo($tweet);
+
           index -= 1;
         }
-
       });
+    </script>
+    <div class="new_tweets">
+      <button type="button"  class="new_tweet_button">New Tweet</button>
+    </div>
+    <div >
+
+    </div>
+    <script>
+
+
+      $(".new_tweet_button").appendTo(".new_tweets")
+      $(".new_tweet_button").click(function(){
+        var $tweet = $('<div></div>');
+        var d = new Date();
+        var n = d.toLocaleString();
+        var tweet = streams.home.pop();
+        var $tweet = $('<div class="tweet"></div>');
+        var $user = $('<p class="user" ></p>');//onClick="return testFunction(this)"
+        var $message = $('<p class="message"></p>');
+        $user.addClass(tweet.user).attr('tweet_user', tweet.user).text('Posted on: ' + n + ' @' + tweet.user + ': ' + tweet.message ).appendTo('.new_tweets');
+      })
+
+//       $(".user").click(function(){
+//   $("p").hide();
+// });
+
+      // $("class").click(function () {
+      //    $("class").hide()
+      // });
+      // function testFunction(current){
+      //   $(current).hide();
+      // }
+      // $user.click(alert('hello'))
 
     </script>
   </body>
