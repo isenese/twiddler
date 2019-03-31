@@ -3,13 +3,14 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="style2.css">
   </head>
-  <body>
+  <body >
     <h1>Ignacio's Twiddler</h1>
     <div class="ten_tweets">
     </div>
     <div class="users_tweets">
-
+    Here we should have the user tweets
     </div>
     <script>
 
@@ -40,7 +41,7 @@
     </div>
     <script>
 
-
+      //new tweets
       $(".new_tweet_button").appendTo(".new_tweets")
       $(".new_tweet_button").click(function(){
         var $tweet = $('<div></div>');
@@ -52,6 +53,32 @@
         var $message = $('<p class="message"></p>');
         $user.addClass(tweet.user).attr('tweet_user', tweet.user).text('Posted on: ' + n + ' @' + tweet.user + ': ' + tweet.message ).appendTo('.new_tweets');
       })
+
+      //new tweet button
+      $('button.new_tweet_button').hover(function(){
+      $('button.new_tweet_button').css("background-color", "lightgrey");},
+      function(){
+      $('button.new_tweet_button').css("background-color", "");
+
+      $('.user').css("cursor", "pointer")
+
+
+
+      $('.ten_tweets').on('click', '.user', function (event){
+        event.preventDefault();
+        var user =$(this).data('user');
+        $('.tweet').not("div:contains('"+ user + "')").hide();
+        $("div:contains('" + user + "')").show();
+      })
+
+
+
+
+
+
+        });
+
+
 
 //       $(".user").click(function(){
 //   $("p").hide();
